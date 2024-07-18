@@ -26,17 +26,18 @@ const userSchema = mongoose.Schema(
       type: String,
       default: "",
     },
-    followers: {
+    followers:[ {
       type: mongoose.Schema.ObjectId,
       ref: "User",
       default: [],
-    },
-    following: {
+    }
+  ],
+    following:[ {
       type: mongoose.Schema.ObjectId,
       ref: "User",
       default: [],
-    },
-
+    }
+  ],
     bio: {
       type: String,
       default: "",

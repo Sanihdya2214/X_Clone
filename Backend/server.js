@@ -2,11 +2,21 @@ import express from "express";
 import dotenv from "dotenv";
 import connectDB from "./db/mongoConnect.js";
 import cookieParser from "cookie-parser";
+import { v2 as cloudinary } from "cloudinary";
 
-import userRoutes from "./Routes/userRoutes.js";
+import authRoutes from "./Routes/auth.routes.js";
+import userRoutes from "./Routes/user.routes.js"
+import postRoutes from "./Routes/post.routes.js"
 
 dotenv.config();
-connectDB();
+
+
+cloudinary.config({
+  cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
+  api_key: process.env.CLOUDINARY_API_KEY,
+  api_secret: process.env.CLOUDINARY_API_SECRET,
+});
+
 
 const app = express();
 const Port = process.env.PORT || 5000;
@@ -16,7 +26,11 @@ app.use(express.urlencoded({ extended: false })); //To pass form data into req.b
 app.use(cookieParser()); //Get the cookie from the request and then get the response cookie
 
 //Routes
-app.use("/api/users", userRoutes);
+app.use("/api/auth", authRoutes);
+app.use("/api/users", userRoutes)
+app.use("/api/post",postRoutes)
+
+
 
 app.get("/", (req, res) => {
   res.send("This us my threads");
@@ -24,4 +38,5 @@ app.get("/", (req, res) => {
 
 app.listen(Port, () => {
   console.log(`The server is running on the port: ${Port}`);
+  connectDB();
 });
