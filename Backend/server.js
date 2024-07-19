@@ -7,6 +7,7 @@ import { v2 as cloudinary } from "cloudinary";
 import authRoutes from "./Routes/auth.routes.js";
 import userRoutes from "./Routes/user.routes.js"
 import postRoutes from "./Routes/post.routes.js"
+import notificationRoutes from "./Routes/notification.routes.js"
 
 dotenv.config();
 
@@ -28,7 +29,8 @@ app.use(cookieParser()); //Get the cookie from the request and then get the resp
 //Routes
 app.use("/api/auth", authRoutes);
 app.use("/api/users", userRoutes)
-app.use("/api/post",postRoutes)
+app.use("/api/post", postRoutes)
+app.use("/api/notifications", notificationRoutes);
 
 
 
