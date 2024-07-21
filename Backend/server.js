@@ -23,10 +23,10 @@ cloudinary.config({
 const app = express();
 const Port = process.env.PORT || 5000;
 
-app.use(bodyParser.json({ limit: "50mb" }))
-app.use(bodyParser.urlencoded({ limit: "50mb", extended: true }));
-app.use(express.json()); //To parse json data into req.body
-app.use(express.urlencoded({ extended: false })); //To pass form data into req.body
+//app.use(bodyParser.json({ limit: "50mb" }))
+//app.use(bodyParser.urlencoded({ limit: "50mb", extended: true }));
+app.use(express.json({ limit: "10mb" })); //To parse json data into req.body
+app.use(express.urlencoded({ limit: "10mb", extended: false })); //To pass form data into req.body
 app.use(cookieParser()); //Get the cookie from the request and then get the response cookie
 
 //Routes
