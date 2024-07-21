@@ -12,12 +12,19 @@ export const Signup = async (req, res) => {
           return res.status(400).json({ error: "Invalid email format" });
         }
         
-        const user = await User.findOne({ $or: [{ email }, { username }] })
-        
-        if (user) {
-            res.status(400).json({ message: "User Already Exist" })
-            
+       
+		const existingUser = await User.findOne({ username });
+    
+        if (existingUser) {
+      return res.status(400).json({ error: "Username is already taken" });
         }
+           
+		const existingEmail = await User.findOne({ email });
+       
+        if (existingEmail) {
+      return res.status(400).json({ error: "Email is already taken" });
+    }
+
         if (password.length < 6) {
           return res
             .status(400)
@@ -31,7 +38,6 @@ export const Signup = async (req, res) => {
         const newUser = new User({
             name,
             username,
-            password,
             email,
            password:hashPassword,
           

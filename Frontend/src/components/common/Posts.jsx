@@ -9,9 +9,9 @@ const Posts = () => {
     <>
       {isLoading && (
         <div className="flex flex-col justify-center">
-          {/* <PostSkeleton />
           <PostSkeleton />
-          <PostSkeleton /> */}
+          <PostSkeleton />
+          <PostSkeleton />
         </div>
       )}
       {!isLoading && POSTS?.length === 0 && (
