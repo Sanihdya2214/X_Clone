@@ -3,6 +3,7 @@ import dotenv from "dotenv";
 import connectDB from "./db/mongoConnect.js";
 import cookieParser from "cookie-parser";
 import { v2 as cloudinary } from "cloudinary";
+import bodyParser from "body-parser"
 
 import authRoutes from "./Routes/auth.routes.js";
 import userRoutes from "./Routes/user.routes.js"
@@ -22,6 +23,8 @@ cloudinary.config({
 const app = express();
 const Port = process.env.PORT || 5000;
 
+app.use(bodyParser.json({ limit: "50mb" }))
+app.use(bodyParser.urlencoded({ limit: "50mb", extended: true }));
 app.use(express.json()); //To parse json data into req.body
 app.use(express.urlencoded({ extended: false })); //To pass form data into req.body
 app.use(cookieParser()); //Get the cookie from the request and then get the response cookie
